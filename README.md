@@ -2,6 +2,7 @@
 
 ## Inicialização via Docker
 docker network create net_app
+
 docker-compose up --build
 
 ## Stack básica utilizada
