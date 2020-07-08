@@ -16,7 +16,7 @@ export const MovieCard = ({ movie }: Props) => {
         <Card.Text>
 
         </Card.Text>
-        <Button variant="primary">Alugar filme</Button>
+        <Button variant="primary" disabled={!movie.availableForRent}>Alugar filme</Button>
       </Card.Body>
     </Card>
   )
