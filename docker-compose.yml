@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app:
+    build: .
+    environment:
+      - TZ=America/Fortaleza
+    volumes:
+      - /tmp
+    ports: 
+      - "80:80"
+    networks:
+      - net_app
+
+networks:
+  net_app:
+    external: true
