@@ -4,7 +4,7 @@ import { Client } from "../config";
 export class MovieService {
   constructor( private _client = Client ) {}
 
-  getMovies = ( params: Page = { page: 0, size: 20 }) => (
+  getMovies = ( params: Page ) => (
     this._client.get<Pagination<Movie>>('/movies', { params })
   )
 

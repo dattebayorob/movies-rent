@@ -1,6 +1,6 @@
 import { MovieService } from "../../../service"
 import { useEffect, useState, useCallback } from "react";
-import { Movie } from "../../../model";
+import { Movie, Page } from "../../../model";
 import { useHistory } from "react-router-dom";
 import { useLoading, useApp, useAuth } from "../../../component";
 
@@ -9,21 +9,29 @@ const movieService = new MovieService();
 export const useList = () => {
 
   const [ movies, setMovies ] = useState<Movie[]>([]);
-  const [ filters, setFilters ] = useState({ page: 0, size: 20, totalElements: 0, totalPages: 0 });
+  const [ filters, setFilters ] = useState({ page: 0, size: 5, totalElements: 0, totalPages: 0, last: false, first: true });
   const { push } = useHistory();
   const { loading } = useLoading();
   const { setLoginModal } = useApp();
   const { authenticated } = useAuth();
 
-  const fetchMovies = useCallback( async () => {
+  const fetchMovies = useCallback( async (page: Page = { page: 0, size: 5}) => {
     try {
-      const { data } = await loading(movieService.getMovies());
+      const { data } = await loading(movieService.getMovies(page));
       setMovies( data.content );
-      setFilters( filters => ({ ...filters, totalElements: data.totalElements, totalPages: data.totalPages  }));
+      setFilters( filters => ({ ...filters, totalElements: data.totalElements, totalPages: data.totalPages, last: data.last, first: data.first  }));
     }catch(ex) {
       setMovies([]);
     }
-  }, [ loading, setMovies ])
+  }, [ loading, setMovies ]);
+
+  const previewPage = () => {
+    fetchMovies({ page: filters.page-1, size: filters.size });
+  }
+
+  const nextPage = () => {
+    fetchMovies({ page: filters.page+1, size: filters.size });
+  }
 
   useEffect(() => {
 
@@ -66,5 +74,7 @@ export const useList = () => {
     filters,
     goToMovieInsertion,
     rentMovie,
+    previewPage,
+    nextPage,
   }
 }
