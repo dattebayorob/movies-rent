@@ -1,5 +1,7 @@
 import React from 'react';
 import { Movie } from '../../model';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 interface Props {
   movie: Movie
@@ -7,13 +9,15 @@ interface Props {
 
 export const MovieCard = ({ movie }: Props) => {
   return (
-    <div>
-      <div>
-        <img src={movie.pictureUrl} alt={`${movie.name}-picture`} />
-      </div>
-      <div>
-        { movie.name }
-      </div>
-    </div>
+    <Card style={{ width: '14rem' }} className='m-4'>
+      <Card.Img variant="top" src={ movie.pictureUrl } style={{ maxHeight: '300px'}}/>
+      <Card.Body>
+        <Card.Title>{ movie.name }</Card.Title>
+        <Card.Text>
+
+        </Card.Text>
+        <Button variant="primary">Alugar filme</Button>
+      </Card.Body>
+    </Card>
   )
 }
