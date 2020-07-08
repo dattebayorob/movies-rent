@@ -45,7 +45,7 @@ export const useList = () => {
       return;
     }
 
-    loading(rentMovieAsync( id ));
+    loading(rentMovieAsync( id! ));
   }
 
   const rentMovieAsync = (movieId: number) => (
