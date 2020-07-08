@@ -8,7 +8,7 @@ import { Header } from '../../../component/header';
 
 export default () => {
 
-  const { movies, goToMovieInsertion } = useList();
+  const { movies, goToMovieInsertion, rentMovie } = useList();
 
   return (
     <Container>
@@ -19,7 +19,7 @@ export default () => {
       </Header>
       <Row className='justify-content-start'>
         { movies.map( movie => (
-            <MovieCard movie={movie} key={movie.id} />
+            <MovieCard movie={movie} key={movie.id} onRentMovie={rentMovie}/>
         ))}
       </Row>
     </Container>
