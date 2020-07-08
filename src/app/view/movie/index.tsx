@@ -9,7 +9,8 @@ export default () => {
     <Suspense fallback='Carregando...'>
       <Switch>
         <Route exact path='/movies' component={MovieList} />
-        <Route path='/movies/:movieid?' component={MovieEdit} />
+        <Route path='/movies/add' component={MovieEdit} />
+        <Route path='/movies/edit/:movieid' component={MovieEdit} />
       </Switch>
     </Suspense>
   )

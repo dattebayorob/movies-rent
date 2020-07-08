@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useAuth, useApp, useLoading } from '../../component';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -11,6 +11,14 @@ export default () => {
   const { isLoginModalDisplayed, setLoginModal } = useApp();
   const [ username, setUsername ] = useState('');
   const [ error, setError ] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+
+    if ( !isLoginModalDisplayed ) {
+      setUsername('');
+      setError(undefined);
+    }
+  }, [setUsername, setError, isLoginModalDisplayed])
 
   const onClose = () => {
     setLoginModal(false);
