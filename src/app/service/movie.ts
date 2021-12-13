@@ -17,6 +17,10 @@ export class MovieService {
     this._client.patch(`/movies/${movieId}/rent`)
   )
 
+  giveBackMovie = ( movieId: number ) => (
+    this._client.delete(`/movies/${movieId}/rent`)
+  )
+
   save = ( movie: Movie ) => (
     this._client.post('/movies', movie).then(response => response.data)
   )

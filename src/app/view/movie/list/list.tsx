@@ -7,7 +7,7 @@ import { MovieCard, AuthRequired, Header } from '../../../component';
 
 export default () => {
 
-  const { movies, filters, goToMovieInsertion, rentMovie, previewPage, nextPage } = useList();
+  const { movies, filters, goToMovieInsertion, rentMovie, returnMovie, previewPage, nextPage } = useList();
 
   return (
     <Container>
@@ -18,7 +18,7 @@ export default () => {
       </Header>
       <Row className='justify-content-start'>
         { movies.map( movie => (
-            <MovieCard movie={movie} key={movie.id} onRentMovie={rentMovie}/>
+            <MovieCard movie={movie} key={movie.id} onRentMovie={rentMovie} onReturnMovie={returnMovie} />
         ))}
       </Row>
       <Row className='justify-content-between mb-5'>

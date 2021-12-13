@@ -69,11 +69,28 @@ export const useList = () => {
     .catch(ex => console.log(ex))
   )
 
+  const giveBackMovie = ({ id }: Movie) => {
+    return loading(giveBackMovieAsync(id!));
+  }
+
+  const giveBackMovieAsync = (movieId: number) => {
+    return movieService.giveBackMovie(movieId).then( () => {
+      setMovies( movies => movies.map( movie => {
+        if ( movie.id === movieId ) {
+          movie.rented = false;
+          movie.availableForRent = true;
+        }
+        return movie;
+      }))
+    })
+  }
+
   return {
     movies, 
     filters,
     goToMovieInsertion,
     rentMovie,
+    returnMovie: giveBackMovie,
     previewPage,
     nextPage,
   }
